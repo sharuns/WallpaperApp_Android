@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.wallpapernamo.R;
+import com.example.wallpapernamo.fragments.FavouriteFragment;
 import com.example.wallpapernamo.fragments.HomeFragment;
 import com.example.wallpapernamo.fragments.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -44,6 +45,9 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
                 break;
             case R.id.nav_set:
                 fragment = new SettingsFragment();
+                break;
+            case R.id.nav_fav:
+                fragment = new FavouriteFragment();
                 break;
             default:
                 break;
