@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<color>
+    <color name="colorPrimary">#3B3740</color>
+    <color name="colorPrimaryDark">#1D1729</color>
+    <color name="colorAccent">#AA1045</color>
+
+    <color name="colorTitle">#B1C7D8</color>
+    <color name="CategoryNames">#ffffff</color>
+    <color name="colorNavDefault">#7ECAD5</color>
+    <color name="colorNavActive">#C18580</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorCategoryBackground">#bb363932</color>
+
+
+</color>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Wallpaper Categories</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_favourite">Favourite</string>
+    <string name="nav_settings">Settings</string>
+    <string name="Home_Fragment">HomeFragment</string>
+    <string name="string_not_signed_in">Please sign in</string>
+    <string name="logout">Logout</string>
+</resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "446787345714",
+    "firebase_url": "https://wallpaperadmin-332fe.firebaseio.com",
+    "project_id": "wallpaperadmin-332fe",
+    "storage_bucket": "wallpaperadmin-332fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446787345714:android:43b4190eb70b3a82a14b2b",
+        "android_client_info": {
+          "package_name": "com.example.wallpapernamo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446787345714-s2q0pq7120ir0r6s4vmnpsql8rq98toe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPkDpukIQEhMAGJPlzN7xEGfEtos-Q6a0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446787345714-s2q0pq7120ir0r6s4vmnpsql8rq98toe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
