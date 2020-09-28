@@ -29,12 +29,10 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
 
     private Context mCtx;
     private  List<Wallpaper> wallpaperList;
-    private String category;
 
-    public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList, String category) {
+    public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList) {
         this.mCtx = mCtx;
         this.wallpaperList = wallpaperList;
-        this.category = category;
     }
 
     @NonNull
@@ -51,6 +49,9 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
         Glide.with(mCtx)
                 .load(w.url)
                 .into(holder.imageView);
+        //Check if wallpaper is favourite
+        if(w.isFavourite)
+            holder.checkBoxFav.setChecked(true);
     }
 
     @Override
@@ -96,14 +97,17 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                 return;
             }
 
+
+
+            int position = getAdapterPosition();
+            Wallpaper w  =  wallpaperList.get(position);
+
+
             //Creating a database reference
             DatabaseReference dbFav = FirebaseDatabase.getInstance().getReference("users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("favourites")
-                    .child(category);
-
-            int position = getAdapterPosition();
-            Wallpaper w  =  wallpaperList.get(position);
+                    .child(w.category);
 
             //User already logged in
             if(isChecked){
