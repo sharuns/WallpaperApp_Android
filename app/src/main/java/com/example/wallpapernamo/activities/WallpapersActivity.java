@@ -39,14 +39,6 @@ public class WallpapersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallpapers);
 
-        wallpaperList = new ArrayList<>();
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new WallpapersAdapter(this, wallpaperList);
-
-        recyclerView.setAdapter(adapter);
-        progressBar = findViewById(R.id.progressbar);
-
         Intent intent = getIntent();
 
         String category = intent.getStringExtra("category");
@@ -54,6 +46,16 @@ public class WallpapersActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(category);
         setSupportActionBar(toolbar);
+
+        wallpaperList = new ArrayList<>();
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter =  new WallpapersAdapter(this, wallpaperList,category);
+
+        recyclerView.setAdapter(adapter);
+        progressBar = findViewById(R.id.progressbar);
+
+
 
         dbWallpapers = FirebaseDatabase.getInstance().getReference("images")
         .child(category);
@@ -66,7 +68,13 @@ public class WallpapersActivity extends AppCompatActivity {
                     if(snapshot.exists()){
 
                             for(DataSnapshot wallpaperSnapShot : snapshot.getChildren()){
-                                Wallpaper w = wallpaperSnapShot.getValue(Wallpaper.class);
+
+                                String id = wallpaperSnapShot.getKey();
+                                String title  = wallpaperSnapShot.child("title").getValue(String.class);
+                                String desc = wallpaperSnapShot.child("desc").getValue(String.class);
+                                String url = wallpaperSnapShot.child("url").getValue(String.class);
+
+                                Wallpaper w = new Wallpaper(id,title,desc,url);
                                 wallpaperList.add(w);
                             }
                             adapter.notifyDataSetChanged();
