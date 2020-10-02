@@ -59,7 +59,7 @@ public class FavouriteFragment extends Fragment {
         //Show settings fragment if user is not logged in
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_area,new SettingsFragment())
+                    .replace(R.id.content_area,new SettingsFragmentFromFav())
                     .commit();
             return;
         }
