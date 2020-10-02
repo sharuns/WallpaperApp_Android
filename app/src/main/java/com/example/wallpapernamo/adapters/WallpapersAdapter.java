@@ -1,11 +1,14 @@
 package com.example.wallpapernamo.adapters;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +31,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.wallpapernamo.BuildConfig;
 import com.example.wallpapernamo.R;
+import com.example.wallpapernamo.fragments.SettingsFragment;
 import com.example.wallpapernamo.models.Category;
 import com.example.wallpapernamo.models.Wallpaper;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,6 +108,8 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             //identify which button is pressed : either share or download
             switch(v.getId()){
                 case R.id.button_download:
+                    //shareWallpaper(wallpaperList.get(getAdapterPosition()));
+                    downloadWallpaper(wallpaperList.get(getAdapterPosition()));
                     break;
                 case R.id.button_share:
                     shareWallpaper(wallpaperList.get(getAdapterPosition()));
@@ -151,6 +159,81 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                 e.printStackTrace();
             }
             return bmpUri;
+        }
+
+        private void downloadWallpaper(final Wallpaper wallpaper){
+            ((Activity)mCtx).findViewById(
+                    R.id.progressbar
+            ).setVisibility(View.VISIBLE);
+
+            Glide.with(mCtx)
+                    .asBitmap()
+                    .load(wallpaper.url)
+                    .into(new SimpleTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                            //sharing with Intent
+
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            Uri uri= saveWallpaperAndGetUri(resource, wallpaper.id);
+                            ((Activity)mCtx).findViewById(
+                                    R.id.progressbar
+                            ).setVisibility(View.GONE);
+
+                            if(uri!=null){
+                                intent.setDataAndType(uri,"image/*");
+                                mCtx.startActivity(Intent.createChooser(intent,"wallpaper_app"));
+                            }
+
+                        }
+                    });
+
+
+        }
+
+        private Uri saveWallpaperAndGetUri(Bitmap bitmap, String id){
+
+            //if permission is granted
+            if(ContextCompat.checkSelfPermission(mCtx, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                if(ActivityCompat.shouldShowRequestPermissionRationale((Activity) mCtx,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){//take to settings screen for access
+
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+
+                    Uri uri = Uri.fromParts("package", mCtx.getPackageName(),null);
+                    intent.setData(uri);
+
+                    mCtx.startActivity(intent);
+
+                }else{
+                    ActivityCompat.requestPermissions((Activity)mCtx, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+                }
+                return null;
+            }
+            //Creating a folder
+
+            //Folder name will be the string used in the end
+            File folder = new File(Environment.getExternalStorageDirectory().toString() + "/wallpapersApp");
+            folder.mkdirs();
+
+            File file = new File(folder,id + ".jpg");
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+                out.flush();
+                out.close();
+                            ((Activity)mCtx).findViewById(
+                                    R.id.progressbar
+                            ).setVisibility(View.GONE);
+                return  FileProvider.getUriForFile(mCtx, BuildConfig.APPLICATION_ID + ".provider", file);//Uri.fromFile(file);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
         }
 
         @Override
