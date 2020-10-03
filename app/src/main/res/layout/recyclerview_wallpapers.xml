@@ -37,18 +37,22 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
+
 
             <CheckBox
                 android:id="@+id/checkbox_favourite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/fav_checkbox_selector" />
+                android:button="@drawable/fav_checkbox_selector"
+                android:layout_marginBottom="30dp"/>
 
             <ImageButton
                 android:id="@+id/button_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/ic_share" />
 
             <ImageButton
