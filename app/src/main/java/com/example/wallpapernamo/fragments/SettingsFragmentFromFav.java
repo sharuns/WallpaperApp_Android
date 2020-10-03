@@ -122,7 +122,7 @@ public class SettingsFragmentFromFav extends Fragment{
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             getActivity().getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.content_area,new SettingsFragmentFromFav())
+                                    .replace(R.id.content_area,new FavouriteFragment())//SettingsFragmentFromFav())
                                     .commit();
                         }else{
                             Toast.makeText(getActivity(),"Login Failure",Toast.LENGTH_LONG).show();
