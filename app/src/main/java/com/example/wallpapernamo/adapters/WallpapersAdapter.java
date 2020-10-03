@@ -163,12 +163,12 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             //identify which button is pressed : either share or download
             switch(v.getId()){
                 case R.id.button_download:
-                    //shareWallpaper(wallpaperList.get(getAdapterPosition()));
-
+                    Toast.makeText(m_activity, "Wallpaper downloading...", Toast.LENGTH_SHORT).show();
                     downloadWallpaper(wallpaperList.get(getAdapterPosition()));
+                    Toast.makeText(m_activity, "Check your internal storage", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.button_share:
-                    Toast.makeText(m_activity, "Sharing,select an option...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(m_activity, "Select a sharing option...", Toast.LENGTH_SHORT).show();
                     shareWallpaper(wallpaperList.get(getAdapterPosition()));
                     break;
             }
@@ -239,7 +239,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
 
                             if(uri!=null){
                                 intent.setDataAndType(uri,"image/*");
-                                mCtx.startActivity(Intent.createChooser(intent,"wallpaper_app"));
+                                Toast.makeText(m_activity, "Wallpaper Saved", Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -317,12 +317,17 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             if(isChecked){
                 //Adding to favourite list
                 dbFav.child(w.id).setValue(w);
-                //Toast.makeText(m_activity, "Saved as Favorite", Toast.LENGTH_SHORT).show();
+
+                if(buttonView.isPressed()) {//gets hit when the checkbox is pressed manually
+                    Toast.makeText(m_activity, "Saved as Favorite", Toast.LENGTH_SHORT).show();
+                }
+
 
             }else{
                 //Remove from favourite list
                 dbFav.child(w.id).setValue(null);
-                //Toast.makeText(m_activity, "Removed from Favorite", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(m_activity, "Removed from Favorite", Toast.LENGTH_SHORT).show();
             }
         }
     }
