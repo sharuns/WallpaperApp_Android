@@ -23,6 +23,7 @@
             android:fontFamily="sans-serif-black"
             android:text="@string/String_sign_in_to_see_fav"
             android:textAlignment="center"
+            android:textColor="#D68F8F"
             android:textSize="30sp" />
 
         <com.google.android.gms.common.SignInButton

@@ -25,6 +25,7 @@
             android:layout_marginTop="5dp"
             android:text="Username"
             android:textAlignment="center"
+            android:textColor="#B58383"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -43,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:drawableLeft="@drawable/ic_baseline_logout"
+            android:textColor="#B58383"
             android:text="@string/logout"
             android:textAlignment="center"
             android:textSize="22sp"

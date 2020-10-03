@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,8 @@ public class HomeFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
         recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false); //was true
+        //Number of columns in the layout
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         categoryList = new ArrayList<>();
