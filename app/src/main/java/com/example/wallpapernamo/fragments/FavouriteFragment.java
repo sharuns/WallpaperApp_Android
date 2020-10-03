@@ -50,7 +50,7 @@ public class FavouriteFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         progressBar = view.findViewById(R.id.progressbar);
 
-        adapter = new WallpapersAdapter(getActivity(),favWalls);
+        adapter = new WallpapersAdapter(getActivity(), favWalls, getActivity().getWindowManager(), getActivity());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

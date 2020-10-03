@@ -2,16 +2,21 @@ package com.example.wallpapernamo.adapters;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -21,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -47,11 +53,15 @@ import java.util.List;
 public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.WallpaperViewHolder> {
 
     private Context mCtx;
+    private Activity m_activity;
+    private WindowManager windowManager;
     private  List<Wallpaper> wallpaperList;
 
-    public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList) {
+    public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList, WindowManager windowManager, Activity m_activity) {
         this.mCtx = mCtx;
         this.wallpaperList = wallpaperList;
+        this.windowManager = windowManager;
+        this.m_activity = m_activity;
     }
 
     @NonNull
@@ -62,7 +72,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WallpaperViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WallpaperViewHolder holder, final int position) {
         Wallpaper w = wallpaperList.get(position);
         holder.textView.setText(w.title);
         Glide.with(mCtx)
@@ -71,7 +81,52 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
         //Check if wallpaper is favourite
         if(w.isFavourite)
             holder.checkBoxFav.setChecked(true);
+
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final WallpaperManager myWallpaperManager = WallpaperManager.getInstance(mCtx);
+                ((Activity) mCtx).findViewById(R.id.progressbar).setVisibility(View.VISIBLE);
+
+                Display display = windowManager.getDefaultDisplay();
+                Point size = new Point();
+                display.getSize(size);
+                int width = size.x;
+                int height = size.y;
+                Wallpaper w = wallpaperList.get(position);
+                Glide.with(mCtx)
+                        .asBitmap()
+                        .load(w.url)
+                        .into(new SimpleTarget<Bitmap>(width,height) {
+                                  @RequiresApi(api = Build.VERSION_CODES.N)
+                                  @Override
+                                  public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                      ((Activity) mCtx).findViewById(R.id.progressbar).setVisibility(View.GONE);
+
+                                      try {
+                                          myWallpaperManager.setBitmap(resource);
+                                          myWallpaperManager.setBitmap(resource, null, true, WallpaperManager.FLAG_LOCK);
+                                          Toast.makeText(m_activity, "Wallpaper Set Successfully", Toast.LENGTH_LONG).show();
+
+                                      } catch (IOException e) {
+                                          e.printStackTrace();
+                                      }
+
+                                  }
+                              }
+                        );
+
+            }
+        });
+
+
+
     }
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -109,9 +164,11 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             switch(v.getId()){
                 case R.id.button_download:
                     //shareWallpaper(wallpaperList.get(getAdapterPosition()));
+
                     downloadWallpaper(wallpaperList.get(getAdapterPosition()));
                     break;
                 case R.id.button_share:
+                    Toast.makeText(m_activity, "Sharing,select an option...", Toast.LENGTH_SHORT).show();
                     shareWallpaper(wallpaperList.get(getAdapterPosition()));
                     break;
             }
@@ -213,7 +270,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             //Creating a folder
 
             //Folder name will be the string used in the end
-            File folder = new File(Environment.getExternalStorageDirectory().toString() + "/wallpapersApp");
+                File folder = new File(Environment.getExternalStorageDirectory().toString() + "/wallpapersApp");
             folder.mkdirs();
 
             File file = new File(folder,id + ".jpg");
@@ -246,7 +303,6 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             }
 
 
-
             int position = getAdapterPosition();
             Wallpaper w  =  wallpaperList.get(position);
 
@@ -261,9 +317,12 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             if(isChecked){
                 //Adding to favourite list
                 dbFav.child(w.id).setValue(w);
+                //Toast.makeText(m_activity, "Saved as Favorite", Toast.LENGTH_SHORT).show();
+
             }else{
                 //Remove from favourite list
                 dbFav.child(w.id).setValue(null);
+                //Toast.makeText(m_activity, "Removed from Favorite", Toast.LENGTH_SHORT).show();
             }
         }
     }

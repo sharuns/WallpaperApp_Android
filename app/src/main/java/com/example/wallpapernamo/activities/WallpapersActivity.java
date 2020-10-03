@@ -53,7 +53,7 @@ public class WallpapersActivity extends AppCompatActivity {
         favList = new ArrayList<>();
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new WallpapersAdapter(this, wallpaperList);
+        adapter =  new WallpapersAdapter(this, wallpaperList,this.getWindowManager(),this); //public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList, WindowManager windowManager, Activity m_activity)
 
         recyclerView.setAdapter(adapter);
         progressBar = findViewById(R.id.progressbar);
