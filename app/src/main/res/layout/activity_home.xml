@@ -16,7 +16,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways">
+            >
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -38,7 +38,7 @@
 
     <include
         layout="@layout/content_main"
-        android:background="#A80E0E" />
+        android:background="#CF4A4A" />
 
 
 

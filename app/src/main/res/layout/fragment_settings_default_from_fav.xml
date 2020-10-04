@@ -15,21 +15,24 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:background="@drawable/ic_login_for_fav" />
+            android:background="@drawable/ic_no_fav_lo"
+            android:layout_gravity="center"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:text="@string/String_sign_in_to_see_fav"
             android:textAlignment="center"
             android:textColor="#D68F8F"
-            android:textSize="30sp" />
+            android:textSize="15sp" />
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/button_google_sign_in"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top
+">
         </com.google.android.gms.common.SignInButton>
 
     </LinearLayout>
