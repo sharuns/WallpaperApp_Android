@@ -7,4 +7,6 @@
     <string name="Home_Fragment">HomeFragment</string>
     <string name="string_not_signed_in">Please sign in</string>
     <string name="logout">Logout</string>
+    <string name="String_sign_in_to_see_fav">Please Sign in to see favourites</string>
+    <string name="adaptive_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
 
     <LinearLayout
@@ -36,5 +37,16 @@
         </com.google.android.gms.common.SignInButton>
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/adaptive_banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

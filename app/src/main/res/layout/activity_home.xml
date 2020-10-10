@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -7,45 +8,22 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/app_name"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                android:textColor="@color/colorTitle"
-                android:textIsSelectable="false"
-                android:textSize="20sp" />
-
-
-        </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <include
         layout="@layout/content_main"
         android:background="#CF4A4A" />
 
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         app:itemIconTint="@color/bottom_nav_item"
         app:itemTextColor="@color/bottom_nav_item"
@@ -53,6 +31,28 @@
         app:menu="@menu/nav_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#423D3D">
+
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/colorTitle"
+            android:textIsSelectable="false"
+            android:textSize="20sp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

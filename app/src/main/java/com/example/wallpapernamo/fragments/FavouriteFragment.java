@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.wallpapernamo.R;
 import com.example.wallpapernamo.adapters.WallpapersAdapter;
 import com.example.wallpapernamo.models.Wallpaper;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +35,7 @@ public class FavouriteFragment extends Fragment {
     WallpapersAdapter adapter;
 
     DatabaseReference dbFav;
+    private AdView mAdView;
 
     @Nullable
     @Override
@@ -45,6 +48,9 @@ public class FavouriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mAdView = view.findViewById(R.id.adView3);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         favWalls = new ArrayList<>();
         recyclerView = view.findViewById(R.id.recycler_view);

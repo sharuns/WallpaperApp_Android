@@ -5,17 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.wallpapernamo.R;
 import com.example.wallpapernamo.fragments.FavouriteFragment;
 import com.example.wallpapernamo.fragments.HomeFragment;
 import com.example.wallpapernamo.fragments.SettingsFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     BottomNavigationView bottomNavigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +37,8 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 
         displayFragment(new HomeFragment());
     }
+
+
 
     private void displayFragment(Fragment fragment){
         getSupportFragmentManager()

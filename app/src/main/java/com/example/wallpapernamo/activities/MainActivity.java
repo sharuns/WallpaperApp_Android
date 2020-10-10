@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.wallpapernamo.R;
+import com.google.android.gms.ads.AdView;
 
 public class MainActivity extends AppCompatActivity {
 

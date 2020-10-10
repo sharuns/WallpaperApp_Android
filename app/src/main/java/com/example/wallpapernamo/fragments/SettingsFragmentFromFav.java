@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.wallpapernamo.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -32,7 +34,7 @@ public class SettingsFragmentFromFav extends Fragment{
 
     private static final int GOOGLE_SIGN_IN_CODE = 212;
     private GoogleSignInClient mGoogleSignInClient;
-
+    private AdView mAdView;
 
     @Nullable
     @Override
@@ -47,6 +49,10 @@ public class SettingsFragmentFromFav extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mAdView = view.findViewById(R.id.adViewFavLog);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         GoogleSignInOptions gso =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id))

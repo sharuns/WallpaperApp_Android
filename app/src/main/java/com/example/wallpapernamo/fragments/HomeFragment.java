@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,9 +38,12 @@ public class HomeFragment extends Fragment {
     private  RecyclerView recyclerView;
     private CategoriesAdapter adapter;
 
+    private AdView mAdView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_home,container, false);
     }
 
@@ -46,6 +51,9 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         
         super.onViewCreated(view, savedInstanceState);
+        mAdView = view.findViewById(R.id.adView2);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         progressBar = view.findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
