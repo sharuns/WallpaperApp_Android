@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
-    android:background="#1E1E1E"
+    android:background="#6A779E"
     android:fitsSystemWindows="false"
     tools:context=".activities.WallpapersActivity">
 
@@ -13,16 +13,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="#6A779E"
         app:layout_scrollFlags="scroll|enterAlways">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:gravity="center_horizontal"
+            android:background="@drawable/radius_1"
             app:titleTextColor="@color/colorTitle">
-
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -35,21 +37,24 @@
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#000000"
+            android:visibility="visible"
             ads:adSize="BANNER"
             ads:adUnitId="@string/adaptive_banner_ad_unit_id">
+
         </com.google.android.gms.ads.AdView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#290C0C"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="60dp"
+            android:background="#6A779E"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="70dp"
             />
 
         <ProgressBar

@@ -3,6 +3,6 @@
     android:id="@+id/content_area"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8E3D3D">
+    android:background="#6A779E">
 
 </RelativeLayout>

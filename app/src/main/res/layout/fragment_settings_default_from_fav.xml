@@ -24,8 +24,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-black"
             android:text="@string/String_sign_in_to_see_fav"
-
-            android:textColor="#D68F8F"
+            android:textColor="#000000"
             android:textSize="15sp" />
 
         <com.google.android.gms.common.SignInButton
@@ -43,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:background="#000000"
         ads:adSize="BANNER"
         ads:adUnitId="@string/adaptive_banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>

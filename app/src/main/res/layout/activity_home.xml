@@ -8,17 +8,9 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity">
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:background="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <include
         layout="@layout/content_main"
-        android:background="#CF4A4A" />
+        android:background="#6A779E" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -27,7 +19,8 @@
         android:layout_gravity="bottom"
         app:itemIconTint="@color/bottom_nav_item"
         app:itemTextColor="@color/bottom_nav_item"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/radius"
+        android:layout_marginBottom="50dp"
         app:menu="@menu/nav_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -35,8 +28,10 @@
     <androidx.appcompat.widget.Toolbar
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#423D3D">
+        android:layout_height="35dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/radius_1">
 
 
         <TextView
@@ -50,7 +45,6 @@
             android:textColor="@color/colorTitle"
             android:textIsSelectable="false"
             android:textSize="20sp" />
-
 
     </androidx.appcompat.widget.Toolbar>
 
