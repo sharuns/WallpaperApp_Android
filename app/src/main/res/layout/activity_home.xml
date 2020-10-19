@@ -6,16 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.HomeActivity">
+    tools:context=".activities.HomeActivity"
+    tools:ignore="ExtraText"
+    >
+
 
     <include
         layout="@layout/content_main"
         android:background="#6A779E" />
 
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="44dp"
         android:layout_gravity="bottom"
         app:itemIconTint="@color/bottom_nav_item"
         app:itemTextColor="@color/bottom_nav_item"
@@ -28,9 +32,7 @@
     <androidx.appcompat.widget.Toolbar
 
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_height="42dp"
         android:background="@drawable/radius_1">
 
 
@@ -42,11 +44,13 @@
             android:text="@string/app_name"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="@color/colorTitle"
+            android:textColor="#000000"
             android:textIsSelectable="false"
             android:textSize="20sp" />
 
     </androidx.appcompat.widget.Toolbar>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
