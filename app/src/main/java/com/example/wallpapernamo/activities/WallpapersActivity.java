@@ -3,6 +3,7 @@ package com.example.wallpapernamo.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,7 +61,9 @@ public class WallpapersActivity extends AppCompatActivity {
         wallpaperList = new ArrayList<>();
         favList = new ArrayList<>();
         recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, true));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,1,GridLayoutManager.HORIZONTAL ,false));
+
         adapter =  new WallpapersAdapter(this, wallpaperList,this.getWindowManager(),this); //public WallpapersAdapter(Context mCtx, List<Wallpaper> wallpaperList, WindowManager windowManager, Activity m_activity)
 
         recyclerView.setAdapter(adapter);

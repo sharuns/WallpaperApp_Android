@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Wallpaper Categories</string>
+    <string name="app_name">Narendra Modi Wallpapers</string>
 
     <string name="nav_home">Home</string>
     <string name="nav_favourite">Favourite</string>
@@ -9,4 +9,6 @@
     <string name="logout">Logout</string>
     <string name="String_sign_in_to_see_fav">Please Sign in to see favourites</string>
     <string name="adaptive_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="your_text">Choose a category</string>
+
 </resources>

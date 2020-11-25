@@ -4,17 +4,17 @@
     <item
         android:icon="@drawable/ic_baseline_home_24"
         android:id="@+id/nav_home"
-        android:title="@string/nav_home"/>
+        />
 
     <item
         android:icon="@drawable/ic_baseline_favorite_24"
         android:id="@+id/nav_fav"
-        android:title="@string/nav_favourite"/>
+        />
 
     <item
         android:icon="@drawable/ic_baseline_settings_24"
         android:id="@+id/nav_set"
-        android:title="@string/nav_settings"/>
+       />
 
 
 </menu>

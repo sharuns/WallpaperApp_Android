@@ -27,16 +27,21 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.wallpapernamo.BuildConfig;
 import com.example.wallpapernamo.R;
+import com.example.wallpapernamo.activities.testact;
 import com.example.wallpapernamo.fragments.SettingsFragment;
 import com.example.wallpapernamo.models.Category;
 import com.example.wallpapernamo.models.Wallpaper;
@@ -83,7 +88,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             holder.checkBoxFav.setChecked(true);
 
 
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+       /* holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final WallpaperManager myWallpaperManager = WallpaperManager.getInstance(mCtx);
@@ -118,7 +123,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                         );
 
             }
-        });
+        });*/
 
 
 
@@ -133,13 +138,13 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
         return wallpaperList.size();
     }
 
-    class WallpaperViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+     class WallpaperViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
         TextView textView;
         ImageView imageView;
 
         CheckBox checkBoxFav;
-        ImageButton buttonShare, buttonDownload;
+        ImageButton buttonShare, buttonDownload , buttonSetWallpaper;
 
         public WallpaperViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -149,11 +154,14 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
 
             checkBoxFav = itemView.findViewById(R.id.checkbox_favourite);
             buttonDownload = itemView.findViewById(R.id.button_download);
+            buttonSetWallpaper = itemView.findViewById(R.id.button_wallset);
             buttonShare = itemView.findViewById(R.id.button_share);
 
             checkBoxFav.setOnCheckedChangeListener(this);
             buttonDownload.setOnClickListener(this);
             buttonShare.setOnClickListener(this); //Click listeners for the respective buttons
+
+            buttonSetWallpaper.setOnClickListener(this);
         }
         //Click listeners for the checkbox and buttons for share and download
         @Override
@@ -171,9 +179,57 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                     Toast.makeText(m_activity, "Select a sharing option...", Toast.LENGTH_SHORT).show();
                     shareWallpaper(wallpaperList.get(getAdapterPosition()));
                     break;
+                case R.id.button_wallset:
+                    String WallpaperName = wallpaperList.get(getAdapterPosition()).title;
+                    //Toast.makeText(m_activity, "Setting " + WallpaperName +" as wallpaper...", Toast.LENGTH_SHORT).show();
+                    setWallpaperFunc(wallpaperList.get(getAdapterPosition()));
+                    break;
             }
 
         }
+
+
+        private void setWallpaperFunc(Wallpaper w1) {
+
+            Intent intent = new Intent((Activity) mCtx, testact.class);
+            intent.putExtra("testID",(String)w1.url);
+            mCtx.startActivity(intent);
+
+        }
+
+            //Wallpaper w = wallpaperList.get(position);
+            //holder.textView.setText(w.title);
+
+
+            /*Display display = windowManager.getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+            Wallpaper w = w1;
+            Glide.with(mCtx)
+                    .asBitmap()
+                    .load(w.url)
+                    .into(new SimpleTarget<Bitmap>(width,height) {
+                              @RequiresApi(api = Build.VERSION_CODES.N)
+                              @Override
+                              public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                                  ((Activity) mCtx).findViewById(R.id.progressbar).setVisibility(View.GONE);
+
+                                  try {
+                                      myWallpaperManager.setBitmap(resource);
+                                      myWallpaperManager.setBitmap(resource, null, true, WallpaperManager.FLAG_LOCK);
+                                      Toast.makeText(m_activity, "Wallpaper Set Successfully", Toast.LENGTH_LONG).show();
+
+                                  } catch (IOException e) {
+                                      e.printStackTrace();
+                                  }
+
+                              }
+                          }
+                    );*/
+
+
 
         private void shareWallpaper(Wallpaper w){
 
@@ -193,9 +249,10 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                             ).setVisibility(View.GONE);
 
                             Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.putExtra(Intent.EXTRA_TEXT, "Download HD wallpapers of Shri Narendra Modi here: https://tinyurl.com/y3nutq63");
                             intent.setType("image/*");
                             intent.putExtra(Intent.EXTRA_STREAM,getLocalBitmapUri(resource));
-                            mCtx.startActivity(Intent.createChooser(intent,"wallpaper_app"));
+                            mCtx.startActivity(Intent.createChooser(intent,"Narendra_Modi_Wallpapers"));
                         }
                     });
         }
@@ -270,7 +327,7 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
             //Creating a folder
 
             //Folder name will be the string used in the end
-                File folder = new File(Environment.getExternalStorageDirectory().toString() + "/wallpapersApp");
+            File folder = new File(Environment.getExternalStorageDirectory().toString() + "/wallpapersApp");
             folder.mkdirs();
 
             File file = new File(folder,id + ".jpg");
@@ -279,9 +336,9 @@ public class WallpapersAdapter extends RecyclerView.Adapter<WallpapersAdapter.Wa
                 bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
                 out.flush();
                 out.close();
-                            ((Activity)mCtx).findViewById(
-                                    R.id.progressbar
-                            ).setVisibility(View.GONE);
+                ((Activity)mCtx).findViewById(
+                        R.id.progressbar
+                ).setVisibility(View.GONE);
                 return  FileProvider.getUriForFile(mCtx, BuildConfig.APPLICATION_ID + ".provider", file);//Uri.fromFile(file);
 
             } catch (FileNotFoundException e) {

@@ -61,7 +61,8 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(false); //was true
         //Number of columns in the layout
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL ,false));
+        //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         categoryList = new ArrayList<>();
         adapter = new CategoriesAdapter(getActivity(), categoryList);

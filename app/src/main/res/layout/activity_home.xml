@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity"
+
     tools:ignore="ExtraText"
     >
 
@@ -16,40 +17,78 @@
         android:background="#6A779E" />
 
 
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemIconTint="@color/bottom_nav_item"
         app:itemTextColor="@color/bottom_nav_item"
-        android:background="@drawable/radius"
-        android:layout_marginBottom="50dp"
-        app:menu="@menu/nav_menu">
+        android:layout_marginBottom="30dp"
+        app:menu="@menu/nav_menu"
+        app:itemIconSize="@dimen/bottom_navigation_icon_size">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <androidx.appcompat.widget.Toolbar
 
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:background="@drawable/radius_1">
+        android:layout_height="100dp"
+        android:layout_gravity="top">
 
 
-        <TextView
-            android:id="@+id/toolbar_title"
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp">
+
+            <ImageView
+                android:id="@+id/roundedImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/app_icon_new" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/app_name"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="#000000"
-            android:textIsSelectable="false"
-            android:textSize="20sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="left"
+                android:text="@string/app_name"
+                android:layout_marginLeft="7dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="#000080"
+                android:textSize="26sp" />
+
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="15dp"
+        android:text="@string/your_text"
+        android:textColor="#000080"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
